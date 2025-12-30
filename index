@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>By The Aura | Exclusive Manifestation Report</title>
+    <style>
+        /* --- CSS STYLING --- */
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@1,500&display=swap');
+
+        :root {
+            --glass: rgba(255, 255, 255, 0.15);
+            --text-color: #ffffff;
+            --success-green: #2ecc71;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Montserrat', sans-serif;
+            /* The "Aura" Background */
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--text-color);
+            overflow: hidden;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            position: relative;
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 3rem;
+            width: 90%;
+            max-width: 450px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            text-align: center;
+        }
+
+        .brand-logo {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        h2 {
+            font-weight: 300;
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            line-height: 1.5;
+        }
+
+        input {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 15px;
+            border: none;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.9);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            box-sizing: border-box; 
+            transition: all 0.3s ease;
+        }
+
+        input:focus {
+            outline: none;
+            background: #fff;
+            box-shadow: 0 0 10px rgba(255,255,255,0.5);
+        }
+
+        /* The Button with Pulse and Motion */
+        .cta-button {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 50px;
+            background: linear-gradient(90deg, #ff8a00, #e52e71);
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(229, 46, 113, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(229, 46, 113, 0.6);
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(255, 255, 255, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
+        }
+
+        .cta-button.success {
+            background: var(--success-green);
+            pointer-events: none; 
+        }
+
+        .disclaimer {
+            margin-top: 1.5rem;
+            font-size: 0.7rem;
+            opacity: 0.7;
+            line-height: 1.4;
+        }
+
+        .hidden-msg {
+            display: none;
+            color: #fff;
+            margin-top: 10px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="brand-logo">By The Aura</div>
+        <h2>Unlock Your Inner Clarity.<br>Get your personalized Manifestation report.</h2>
+
+        <form id="emailForm">
+            <input type="text" id="name" placeholder="Your First Name" required>
+            <input type="email" id="email" placeholder="Your Best Email Address" required>
+            
+            <button type="submit" id="submitBtn" class="cta-button">
+                YES! SEND ME THE REPORT
+            </button>
+        </form>
+
+        <p class="hidden-msg" id="loadingMsg">Aligning your energy... Redirecting...</p>
+
+        <div class="disclaimer">
+            <strong>Your Privacy is Sacred.</strong><br>
+            By entering your details, you agree to receive emails from "By The Aura". 
+            We respect your inbox and you can unsubscribe at any time. 
+            <br>(CAN-SPAM Act Compliant)
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+
+        // --- YOUR CONFIGURATION ---
+        const firebaseConfig = {
+            apiKey: "AIzaSyC5vJMlHs-gyklYHGsnkSdEymleTgh7Xow",
+            authDomain: "by-the-aura-funnel.firebaseapp.com",
+            projectId: "by-the-aura-funnel",
+            storageBucket: "by-the-aura-funnel.firebasestorage.app",
+            messagingSenderId: "864458766620",
+            appId: "1:864458766620:web:4f01317280dbe40929e2d9",
+            measurementId: "G-8P5D369FZW"
+        };
+
+        // --- IMPORTANT: PASTE YOUR PDF LINK HERE LATER ---
+        // Example: "https://your-website.com/downloads/report.pdf" 
+        // or "Coming Back To Yourself The Reset You Have Been Putting off.pdf" if it's in the same folder.
+        const PDF_URL = "INSERT_YOUR_PDF_LINK_HERE"; 
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // Handle Form Submission
+        const form = document.getElementById('emailForm');
+        const btn = document.getElementById('submitBtn');
+        const loadingMsg = document.getElementById('loadingMsg');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault(); 
+
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+
+            // 1. UI Feedback: Turn Green and Pulse
+            btn.classList.add('success');
+            btn.innerHTML = "ACCESS GRANTED ✓";
+            loadingMsg.style.display = "block";
+
+            try {
+                // 2. Send data to Firebase
+                await addDoc(collection(db, "leads"), {
+                    name: name,
+                    email: email,
+                    downloadedAt: serverTimestamp(),
+                    source: "By The Aura Web Funnel"
+                });
+
+                // 3. Redirect to PDF
+                // Checks if you have added the link yet
+                if(PDF_URL === "INSERT_YOUR_PDF_LINK_HERE") {
+                    alert("The PDF link is being updated. Please check back later!");
+                    console.log("Owner: Please update the PDF_URL variable in the code.");
+                } else {
+                    setTimeout(() => {
+                        window.location.href = PDF_URL;
+                    }, 1500);
+                }
+
+            } catch (error) {
+                console.error("Error adding document: ", error);
+                btn.classList.remove('success');
+                btn.innerHTML = "Error. Try again.";
+                alert("Something went wrong. Please check your internet connection.");
+            }
+        });
+    </script>
+
+</body>
+</html>
