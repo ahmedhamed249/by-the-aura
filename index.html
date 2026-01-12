@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>By The Aura | Exclusive Manifestation Report</title>
+    <title>By The Aura | Unlock The Full Reset</title>
     <style>
         /* --- CSS STYLING --- */
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@1,500&display=swap');
@@ -18,7 +18,6 @@
             margin: 0;
             padding: 0;
             font-family: 'Montserrat', sans-serif;
-            /* The "Aura" Background */
             background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
             background-size: 400% 400%;
             animation: gradientBG 15s ease infinite;
@@ -53,7 +52,7 @@
         .brand-logo {
             font-family: 'Playfair Display', serif;
             font-style: italic;
-            font-size: 2rem;
+            font-size: 2.2rem;
             margin-bottom: 0.5rem;
             letter-spacing: 1px;
             text-shadow: 0 2px 4px rgba(0,0,0,0.2);
@@ -61,9 +60,10 @@
 
         h2 {
             font-weight: 300;
-            font-size: 1.2rem;
+            font-size: 1.4rem;
             margin-bottom: 2rem;
             line-height: 1.5;
+            letter-spacing: 1px;
         }
 
         input {
@@ -82,55 +82,55 @@
         input:focus {
             outline: none;
             background: #fff;
-            box-shadow: 0 0 10px rgba(255,255,255,0.5);
+            box-shadow: 0 0 15px rgba(255,255,255,0.4);
         }
 
-        /* The Button with Pulse and Motion */
         .cta-button {
             width: 100%;
-            padding: 15px;
+            padding: 16px;
             border: none;
             border-radius: 50px;
             background: linear-gradient(90deg, #ff8a00, #e52e71);
             color: white;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             font-weight: 600;
+            letter-spacing: 2px;
             cursor: pointer;
             transition: all 0.3s ease;
             box-shadow: 0 5px 15px rgba(229, 46, 113, 0.4);
             position: relative;
-            overflow: hidden;
         }
 
         .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(229, 46, 113, 0.6);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(229, 46, 113, 0.6);
             animation: pulse 1.5s infinite;
         }
 
         @keyframes pulse {
             0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4); }
-            70% { box-shadow: 0 0 0 10px rgba(255, 255, 255, 0); }
+            70% { box-shadow: 0 0 0 12px rgba(255, 255, 255, 0); }
             100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
         }
 
         .cta-button.success {
-            background: var(--success-green);
+            background: var(--success-green) !important;
             pointer-events: none; 
         }
 
         .disclaimer {
             margin-top: 1.5rem;
-            font-size: 0.7rem;
-            opacity: 0.7;
+            font-size: 0.75rem;
+            opacity: 0.8;
             line-height: 1.4;
         }
 
-        .hidden-msg {
+        #loadingMsg {
             display: none;
             color: #fff;
-            margin-top: 10px;
-            font-weight: 600;
+            margin-top: 15px;
+            font-weight: 400;
+            font-style: italic;
         }
     </style>
 </head>
@@ -138,24 +138,23 @@
 
     <div class="container">
         <div class="brand-logo">By The Aura</div>
-        <h2>Unlock Your Inner Clarity.<br>Get your personalized Manifestation report.</h2>
+        <h2>Unlock The Full Reset</h2>
 
         <form id="emailForm">
-            <input type="text" id="name" placeholder="Your First Name" required>
-            <input type="email" id="email" placeholder="Your Best Email Address" required>
+            <input type="text" id="name" placeholder="Name" required>
+            <input type="email" id="email" placeholder="Email Address" required>
             
             <button type="submit" id="submitBtn" class="cta-button">
-                YES! SEND ME THE REPORT
+                CLAIM
             </button>
         </form>
 
-        <p class="hidden-msg" id="loadingMsg">Aligning your energy... Redirecting...</p>
+        <p id="loadingMsg">Preparing your report... Redirecting to your reset.</p>
 
         <div class="disclaimer">
             <strong>Your Privacy is Sacred.</strong><br>
-            By entering your details, you agree to receive emails from "By The Aura". 
-            We respect your inbox and you can unsubscribe at any time. 
-            <br>(CAN-SPAM Act Compliant)
+            By clicking claim, you agree to receive manifestation insights from "By The Aura". 
+            No spam, just energy. Unsubscribe anytime. (CAN-SPAM Compliant)
         </div>
     </div>
 
@@ -163,7 +162,6 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
         import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
 
-        // --- YOUR CONFIGURATION ---
         const firebaseConfig = {
             apiKey: "AIzaSyC5vJMlHs-gyklYHGsnkSdEymleTgh7Xow",
             authDomain: "by-the-aura-funnel.firebaseapp.com",
@@ -174,16 +172,11 @@
             measurementId: "G-8P5D369FZW"
         };
 
-        // --- IMPORTANT: PASTE YOUR PDF LINK HERE LATER ---
-        // Example: "https://your-website.com/downloads/report.pdf" 
-        // or "Coming Back To Yourself The Reset You Have Been Putting off.pdf" if it's in the same folder.
-        const PDF_URL = "INSERT_YOUR_PDF_LINK_HERE"; 
+        const PDF_URL = "http://bit.ly/49v1IlF"; 
 
-        // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        // Handle Form Submission
         const form = document.getElementById('emailForm');
         const btn = document.getElementById('submitBtn');
         const loadingMsg = document.getElementById('loadingMsg');
@@ -194,36 +187,30 @@
             const name = document.getElementById('name').value;
             const email = document.getElementById('email').value;
 
-            // 1. UI Feedback: Turn Green and Pulse
+            // UI feedback
             btn.classList.add('success');
-            btn.innerHTML = "ACCESS GRANTED ✓";
+            btn.innerHTML = "CLAIMED ✓";
             loadingMsg.style.display = "block";
 
             try {
-                // 2. Send data to Firebase
+                // Save to Firebase
                 await addDoc(collection(db, "leads"), {
                     name: name,
                     email: email,
                     downloadedAt: serverTimestamp(),
-                    source: "By The Aura Web Funnel"
+                    source: "Full Reset Landing Page"
                 });
 
-                // 3. Redirect to PDF
-                // Checks if you have added the link yet
-                if(PDF_URL === "INSERT_YOUR_PDF_LINK_HERE") {
-                    alert("The PDF link is being updated. Please check back later!");
-                    console.log("Owner: Please update the PDF_URL variable in the code.");
-                } else {
-                    setTimeout(() => {
-                        window.location.href = PDF_URL;
-                    }, 1500);
-                }
+                // Short delay for the "Claimed" green state before redirect
+                setTimeout(() => {
+                    window.location.href = PDF_URL;
+                }, 1200);
 
             } catch (error) {
-                console.error("Error adding document: ", error);
+                console.error("Error:", error);
                 btn.classList.remove('success');
-                btn.innerHTML = "Error. Try again.";
-                alert("Something went wrong. Please check your internet connection.");
+                btn.innerHTML = "ERROR. TRY AGAIN.";
+                alert("Something went wrong. Please check your connection.");
             }
         });
     </script>
