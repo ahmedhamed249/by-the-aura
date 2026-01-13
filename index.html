@@ -61,9 +61,17 @@
         h2 {
             font-weight: 300;
             font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+            letter-spacing: 1px;
+        }
+
+        .sub-text {
+            font-size: 0.95rem;
+            font-weight: 300;
             margin-bottom: 2rem;
             line-height: 1.5;
-            letter-spacing: 1px;
+            opacity: 0.9;
         }
 
         input {
@@ -139,21 +147,25 @@
     <div class="container">
         <div class="brand-logo">By The Aura</div>
         <h2>Unlock The Full Reset</h2>
+        <div class="sub-text">
+            Made for you.<br>
+            Get instant access to the Reset Guide and return to it whenever you need grounding.
+        </div>
 
         <form id="emailForm">
             <input type="text" id="name" placeholder="Name" required>
             <input type="email" id="email" placeholder="Email Address" required>
             
             <button type="submit" id="submitBtn" class="cta-button">
-                CLAIM
+                Download Guide
             </button>
         </form>
 
-        <p id="loadingMsg">Preparing your report... Redirecting to your reset.</p>
+        <p id="loadingMsg">Aligning your energy...</p>
 
         <div class="disclaimer">
             <strong>Your Privacy is Sacred.</strong><br>
-            By clicking claim, you agree to receive manifestation insights from "By The Aura". 
+            By clicking download, you agree to receive manifestation insights from "By The Aura". 
             No spam, just energy. Unsubscribe anytime. (CAN-SPAM Compliant)
         </div>
     </div>
@@ -173,6 +185,7 @@
         };
 
         const PDF_URL = "http://bit.ly/49v1IlF"; 
+        const AFFILIATE_URL = "https://hop.clickbank.net/?affiliate=soulbloom1&vendor=brainsig&cbpage=TSL";
 
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
@@ -189,7 +202,7 @@
 
             // UI feedback
             btn.classList.add('success');
-            btn.innerHTML = "CLAIMED ✓";
+            btn.innerHTML = "DONE ✓";
             loadingMsg.style.display = "block";
 
             try {
@@ -198,19 +211,22 @@
                     name: name,
                     email: email,
                     downloadedAt: serverTimestamp(),
-                    source: "Full Reset Landing Page"
+                    source: "Reset Guide Bridge Page"
                 });
 
-                // Short delay for the "Claimed" green state before redirect
+                // 1. Open PDF in a NEW tab
+                window.open(PDF_URL, '_blank');
+
+                // 2. Redirect the CURRENT tab to ClickBank after a tiny delay
                 setTimeout(() => {
-                    window.location.href = PDF_URL;
-                }, 1200);
+                    window.location.href = AFFILIATE_URL;
+                }, 800);
 
             } catch (error) {
                 console.error("Error:", error);
                 btn.classList.remove('success');
                 btn.innerHTML = "ERROR. TRY AGAIN.";
-                alert("Something went wrong. Please check your connection.");
+                alert("Please check your internet connection and try again.");
             }
         });
     </script>
