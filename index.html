@@ -3,6 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Pinterest Domain Verification Tag -->
+    <meta name="p:domain_verify" content="696c0454365ff747d74fe04059fc5830"/>
+
     <title>By The Aura | Unlock The Full Reset</title>
     
     <!-- FAVICON -->
@@ -92,14 +96,11 @@
             width: 90%;
             max-width: 420px;
             text-align: center;
-            
-            /* Sleek Modern Frame */
             border: 1px solid rgba(255, 255, 255, 0.3);
             box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3), 
                         inset 0 0 20px rgba(255, 255, 255, 0.05);
         }
 
-        /* Decorative border glow effect */
         .container::before {
             content: '';
             position: absolute;
@@ -177,7 +178,6 @@
             box-shadow: 0 0 15px rgba(255,255,255,0.2);
         }
 
-        /* Updated CTA Button with Vibrant Purple Hover */
         .cta-button {
             width: 100%;
             padding: 18px;
@@ -257,14 +257,15 @@
 
     <div class="main-content">
         <div class="container">
-            <!-- Top Preview Image -->
-            <img src="https://drive.google.com/thumbnail?id=1TJ69ZhSvk0n7nXXn1AOsoKBbxKjEb_jz&sz=w400" alt="Reset Guide Preview" class="report-preview" onerror="this.style.display='none'">
+            <img src="https://drive.google.com/file/d/1bK6EZr6aqGaVwC_97cZ5PdpTDsk8EdfD/view?usp=sharing" alt="Reset Guide Preview" class="report-preview" onerror="this.style.display='none'">
 
             <div class="brand-logo">By The Aura</div>
             <h2>Unlock The Full Reset</h2>
             <div class="sub-text">
-                Made for you.<br>
-                Download and access the Reset Guide and return to it whenever you need grounding.
+                Made for you...<br>
+
+                Get instant access to the Reset Guide and return to it whenever you need grounding.
+                Unlock the 4-step reset to feel like yourself again. Clear, present, and in control. By downloading, you’ll receive the guide + a few short emails to help you remember & apply it. Unsubscribe anytime.
             </div>
 
             <form id="emailForm">
@@ -272,20 +273,20 @@
                 <input type="email" id="email" placeholder="Email Address" required autocomplete="email">
                 
                 <button type="submit" id="submitBtn" class="cta-button">
-                    Download Guide
+                    Get The 4-Step Reset Guide
                 </button>
             </form>
 
             <p id="loadingMsg">Vibrations rising... preparing your guide.</p>
 
             <div class="disclaimer">
-                By clicking download, you also agree to receive meditation guidance, Manifestation programs and insights from "By The Aura". 
+                By clicking download, you agree to receive manifestation insights from "By The Aura". 
                 No spam, just energy. Unsubscribe anytime. (CAN-SPAM Compliant)
             </div>
 
             <div class="footer">
                 <img src="https://yt3.ggpht.com/nPwfYUxKnpNSw8q5ipobRIYf-bVr1x2tdSaMNuFLiTTD2G0ZN3mp8xv3XhNouZvNqk9dqrUO=s600-c-k-c0x00ffffff-no-rj-rp-mo" alt="Logo" class="footer-logo">
-                <div class="footer-text">By The Aura 2026 | All Rights Reserved</div>
+                <div class="footer-text">By The Aura | All Rights Reserved</div>
             </div>
         </div>
     </div>
@@ -304,7 +305,7 @@
             measurementId: "G-8P5D369FZW"
         };
 
-        const PDF_URL = "https://drive.google.com/file/d/184nyrLuXhLxaz1KYZX2JJBwJu_7JgZdg/view?usp=sharing"; 
+        const PDF_URL = "https://drive.google.com/file/d/1nO3a7O2rx2d1zGzyO6e5yh7xMrYpuHpL/view?usp=sharing"; 
         const REDIRECT_URL = "https://beacons.ai/bytheaura555";
 
         const app = initializeApp(firebaseConfig);
@@ -332,10 +333,8 @@
                     source: "Reset Guide Bridge Page"
                 });
 
-                // 1. Open PDF in a new tab
                 window.open(PDF_URL, '_blank');
 
-                // 2. Redirect the main page to the Beacons link
                 setTimeout(() => {
                     window.location.href = REDIRECT_URL;
                 }, 1000);
